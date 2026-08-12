@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b63f6">
+  <meta name="description" content="FP Mensajería: entregas rápidas, seguras y confiables. Paquetes, documentos y delivery de comidas.">
+  <meta property="og:title" content="FP Mensajería | Entregamos confianza">
+  <meta property="og:description" content="Mensajería rápida, segura y confiable para personas, comercios y empresas.">
+  <meta property="og:type" content="website">
+  <title>FP Mensajería | Entregamos confianza</title>
+  <link rel="icon" href="assets/logo-fp.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header" id="inicio">
+    <div class="container nav-wrap">
+      <a class="brand" href="#inicio" aria-label="FP Mensajería inicio"><img src="assets/logo-fp.png" alt="FP Mensajería"></a>
+      <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+      <nav class="nav" aria-label="Navegación principal">
+        <a class="active" href="#inicio">Inicio</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#como-funciona">¿Cómo funciona?</a>
+        <a href="#nosotros">Nosotros</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <a class="btn btn-primary nav-cta" data-whatsapp="true" href="#">Solicitar envío <span>→</span></a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <div class="eyebrow">FP MENSAJERÍA</div>
+          <h1>Más que entregas,<br><span>entregamos confianza.</span></h1>
+          <p class="lead">Mensajería rápida, segura y confiable. Paquetes, documentos y delivery de comidas a donde lo necesites.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" data-whatsapp="true" href="#">Solicitar envío <span>→</span></a>
+            <a class="btn btn-outline" href="#servicios">Nuestros servicios</a>
+          </div>
+          <div class="trust-row">
+            <div><b>⚡ Rápido</b><small>Entregas el mismo día</small></div>
+            <div><b>◈ Seguro</b><small>Tu envío, en buenas manos</small></div>
+            <div><b>⌖ Confiable</b><small>Seguimiento en tiempo real</small></div>
+          </div>
+        </div>
+        <div class="hero-visual reveal">
+          <div class="hero-glow"></div>
+          <img src="assets/hero-delivery.png" alt="Mensajero de FP Mensajería en motocicleta" loading="eager">
+        </div>
+      </div>
+      <div class="hero-wave"></div>
+    </section>
+
+    <section class="tracking" aria-label="Rastrear envío">
+      <div class="container">
+        <div class="tracking-card">
+          <div class="tracking-icon">▣</div>
+          <div class="tracking-copy"><strong>Rastrea tu envío</strong><span>Ingresa tu número de guía para conocer el estado de tu paquete.</span></div>
+          <form id="trackingForm" class="tracking-form">
+            <label class="sr-only" for="trackingCode">Número de guía</label>
+            <input id="trackingCode" name="trackingCode" placeholder="Ej. FP-2026-001" autocomplete="off" required>
+            <button class="btn btn-primary" type="submit">Rastrear <span>→</span></button>
+          </form>
+        </div>
+        <div id="trackingResult" class="tracking-result" role="status" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="section" id="servicios">
+      <div class="container">
+        <div class="section-head">
+          <div><div class="eyebrow">NUESTROS SERVICIOS</div><h2>Soluciones para cada necesidad</h2></div>
+          <p>Una misma marca para mensajería, última milla y delivery. Simple para el cliente, eficiente para el negocio.</p>
+        </div>
+        <div class="service-grid">
+          <article class="service-card"><div class="icon">⚡</div><h3>Envíos Express</h3><p>Entregas rápidas en la ciudad y alrededores.</p><a href="#contacto">Más información →</a></article>
+          <article class="service-card"><div class="icon">▣</div><h3>Envíos Nacionales</h3><p>Llegamos a cualquier lugar del país de forma segura.</p><a href="#contacto">Más información →</a></article>
+          <article class="service-card"><div class="icon">♨</div><h3>Delivery de Comidas</h3><p>Soluciones rápidas y confiables para restaurantes y negocios gastronómicos.</p><a href="#delivery">Más información →</a></article>
+          <article class="service-card"><div class="icon">▦</div><h3>Soluciones Empresariales</h3><p>Logística personalizada para empresas de todos los tamaños.</p><a href="#contacto">Más información →</a></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="process section" id="como-funciona">
+      <div class="container process-grid">
+        <div class="phone-card reveal">
+          <div class="phone-notch"></div>
+          <div class="map-lines"><span></span><span></span><span></span><span></span></div>
+          <div class="route"></div><div class="pin">●</div>
+          <div class="status-pill"><b>● En camino</b><small>Tu envío está en ruta</small></div>
+        </div>
+        <div>
+          <div class="eyebrow">¿CÓMO FUNCIONA?</div>
+          <h2>Así de fácil es enviar con FP Mensajería</h2>
+          <div class="steps">
+            <div class="step"><b>1</b><div><strong>Solicita tu envío</strong><span>Completa el formulario o escríbenos por WhatsApp.</span></div></div>
+            <div class="step"><b>2</b><div><strong>Recogemos tu paquete</strong><span>Pasamos por tu envío en la dirección acordada.</span></div></div>
+            <div class="step"><b>3</b><div><strong>Entregamos a tiempo</strong><span>Tu paquete llega seguro a su destino.</span></div></div>
+            <div class="step"><b>4</b><div><strong>Tú y tu cliente satisfechos</strong><span>Porque nuestro compromiso es tu tranquilidad.</span></div></div>
+          </div>
+          <a class="btn btn-primary" data-whatsapp="true" href="#">Solicitar envío <span>→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats">
+      <div class="container stats-grid">
+        <div><b data-counter="15000">0</b><span>Envíos realizados</span></div>
+        <div><b data-counter="8000">0</b><span>Clientes satisfechos</span></div>
+        <div><b data-counter="98" data-suffix="%">0</b><span>Entregas a tiempo</span></div>
+        <div><b data-counter="120" data-prefix="+">0</b><span>Ciudades cubiertas</span></div>
+      </div>
+    </section>
+
+    <section class="delivery section" id="delivery">
+      <div class="container delivery-card">
+        <div class="delivery-copy">
+          <div class="eyebrow">¿TIENES UN NEGOCIO DE COMIDAS?</div>
+          <h2>Impulsa tu negocio con <span>nuestro delivery</span></h2>
+          <p>Ofrecemos soluciones rápidas y confiables para restaurantes, cafeterías y negocios de comida.</p>
+          <a class="btn btn-primary" data-whatsapp="true" href="#">Quiero vender más <span>→</span></a>
+        </div>
+        <div class="food-visual"><img src="assets/food-delivery.png" alt="Servicio de delivery para negocios de comida" loading="lazy"><div class="sales-badge">🚀 <span><b>Más ventas</b><small>Clientes felices · Entregas rápidas</small></span></div></div>
+      </div>
+    </section>
+
+    <section class="about section" id="nosotros">
+      <div class="container about-grid">
+        <div><div class="eyebrow">NOSOTROS</div><h2>Logística con rostro humano.</h2></div>
+        <div><p>En FP Mensajería combinamos rapidez, tecnología y atención cercana para que cada entrega sea una experiencia confiable.</p><div class="values"><span>✓ Puntualidad</span><span>✓ Seguridad</span><span>✓ Atención</span><span>✓ Tecnología</span></div></div>
+      </div>
+    </section>
+
+    <section class="contact section" id="contacto">
+      <div class="container contact-grid">
+        <div><div class="eyebrow">HABLEMOS</div><h2>¿Tienes un envío?</h2><p>Cuéntanos qué necesitas y te ayudamos a encontrar la mejor solución.</p></div>
+        <form class="contact-form" id="contactForm">
+          <label>Nombre<input name="name" required placeholder="Tu nombre"></label>
+          <label>Teléfono<input name="phone" required placeholder="300 000 0000"></label>
+          <label>¿Qué necesitas?<textarea name="message" rows="4" required placeholder="Cuéntanos brevemente tu necesidad"></textarea></label>
+          <button class="btn btn-primary" type="submit">Solicitar información <span>→</span></button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div><img src="assets/logo-fp.png" alt="FP Mensajería" class="footer-logo"><p>Tu aliado estratégico en mensajería y logística. Confianza, rapidez y compromiso en cada entrega.</p></div>
+      <div><h4>Enlaces rápidos</h4><a href="#inicio">Inicio</a><a href="#servicios">Servicios</a><a href="#como-funciona">¿Cómo funciona?</a><a href="#nosotros">Nosotros</a><a href="#contacto">Contacto</a></div>
+      <div><h4>Servicios</h4><a href="#servicios">Envíos Express</a><a href="#servicios">Envíos Nacionales</a><a href="#delivery">Delivery de Comidas</a><a href="#contacto">Soluciones Empresariales</a></div>
+      <div><h4>Contacto</h4><a data-phone-link href="#">WhatsApp</a><a href="mailto:info@fpmenajeria.com">info@fpmenajeria.com</a><span>Lun–Sáb · 7:00 am–7:00 pm</span></div>
+    </div>
+    <div class="container footer-bottom"><span>© <span id="year"></span> FP Mensajería. Todos los derechos reservados.</span><span>Diseño web · FP Mensajería</span></div>
+  </footer>
+  <button class="to-top" id="toTop" aria-label="Volver arriba">↑</button>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="js/app.js"></script>
+</body>
+</html>
