@@ -13,12 +13,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
   <header class="site-header" id="inicio">
     <div class="container nav-wrap">
-      <a class="brand" href="#inicio" aria-label="FP Mensajería inicio"><img src="/assets/logo-fp.png" alt="FP Mensajería"></a>
+      <a class="brand" href="#inicio" aria-label="FP Mensajería inicio"><img src="/assets/logo-fp-header.png" alt="FP Mensajería"></a>
       <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
       <nav class="nav" aria-label="Navegación principal">
         <a class="active" href="#inicio">Inicio</a>
@@ -123,9 +123,9 @@
           <div class="eyebrow">¿TIENES UN NEGOCIO DE COMIDAS?</div>
           <h2>Impulsa tu negocio con <span>nuestro delivery</span></h2>
           <p>Ofrecemos soluciones rápidas y confiables para restaurantes, cafeterías y negocios de comida.</p>
-          <a class="btn btn-primary" data-whatsapp="true" href="#">Quiero vender más <span>→</span></a>
+          <a class="btn btn-primary" href="#" id="deliveryJoinBtn">Quiero vender más <span>→</span></a>
         </div>
-        <div class="food-visual"><img src="assets/food-delivery.png" alt="Servicio de delivery para negocios de comida" loading="lazy"><div class="sales-badge">🚀 <span><b>Más ventas</b><small>Clientes felices · Entregas rápidas</small></span></div></div>
+        <div class="food-visual"><img src="/assets/food-delivery.png" alt="Servicio de delivery para negocios de comida" loading="lazy"><div class="sales-badge">🚀 <span><b>Más ventas</b><small>Clientes felices · Entregas rápidas</small></span></div></div>
       </div>
     </section>
 
@@ -151,7 +151,7 @@
 
   <footer class="footer">
     <div class="container footer-grid">
-      <div><img src="assets/logo-fp.png" alt="FP Mensajería" class="footer-logo"><p>Tu aliado estratégico en mensajería y logística. Confianza, rapidez y compromiso en cada entrega.</p></div>
+      <div><img src="/assets/logo-fp.png" alt="FP Mensajería" class="footer-logo"><p>Tu aliado estratégico en mensajería y logística. Confianza, rapidez y compromiso en cada entrega.</p></div>
       <div><h4>Enlaces rápidos</h4><a href="#inicio">Inicio</a><a href="#servicios">Servicios</a><a href="#como-funciona">¿Cómo funciona?</a><a href="#nosotros">Nosotros</a><a href="#contacto">Contacto</a></div>
       <div><h4>Servicios</h4><a href="#servicios">Envíos Express</a><a href="#servicios">Envíos Nacionales</a><a href="#delivery">Delivery de Comidas</a><a href="#contacto">Soluciones Empresariales</a></div>
       <div><h4>Contacto</h4><a data-phone-link href="#">WhatsApp</a><a href="mailto:info@fpmenajeria.com">info@fpmenajeria.com</a><span>Lun–Sáb · 7:00 am–7:00 pm</span></div>
@@ -160,6 +160,43 @@
   </footer>
   <button class="to-top" id="toTop" aria-label="Volver arriba">↑</button>
   <div class="toast" id="toast" role="status"></div>
+
+  <!-- DEMO MODALS -->
+  <div class="demo-modal" id="trackingModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="trackingModalTitle">
+    <div class="demo-backdrop" data-close-modal="trackingModal"></div>
+    <div class="demo-dialog tracking-dialog">
+      <button class="demo-close" type="button" aria-label="Cerrar" data-close-modal="trackingModal">×</button>
+      <div class="demo-kicker">FP MENSAJERÍA · DEMO</div>
+      <h2 id="trackingModalTitle">Estado de tu envío</h2>
+      <div class="tracking-code-display" id="modalTrackingCode"></div>
+      <div class="demo-status" id="modalTrackingStatus"></div>
+      <div class="tracking-timeline" id="trackingTimeline"></div>
+      <p class="demo-note">Esta consulta es una simulación para mostrar cómo funcionaría el rastreo en la versión final.</p>
+    </div>
+  </div>
+
+  <div class="demo-modal" id="deliveryModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="deliveryModalTitle">
+    <div class="demo-backdrop" data-close-modal="deliveryModal"></div>
+    <div class="demo-dialog delivery-dialog">
+      <button class="demo-close" type="button" aria-label="Cerrar" data-close-modal="deliveryModal">×</button>
+      <div class="demo-kicker">FP DELIVERY · DEMO</div>
+      <h2 id="deliveryModalTitle">Empieza a recibir pedidos</h2>
+      <p class="delivery-intro">Así funcionaría el proceso para vincular tu negocio al servicio de delivery de FP.</p>
+      <div class="emoji-steps">
+        <div><span>📱</span><strong>Descarga la app de delivery para restaurantes.</strong></div>
+        <div><span>📝</span><strong>Registra tu negocio y completa tus datos.</strong></div>
+        <div><span>🍔</span><strong>Publica tu menú, productos y precios.</strong></div>
+        <div><span>🔔</span><strong>Activa tu negocio y comienza a recibir pedidos.</strong></div>
+        <div><span>👨‍🍳</span><strong>Prepara el pedido cuando llegue una solicitud.</strong></div>
+        <div><span>🛵</span><strong>FP recoge el pedido y lo lleva a tu cliente.</strong></div>
+        <div><span>💰</span><strong>Vende más y haz crecer tu negocio.</strong></div>
+      </div>
+      <div class="demo-actions">
+        <button class="btn btn-primary" type="button" id="deliveryDemoContinue">Quiero registrarme <span>→</span></button>
+        <button class="btn btn-outline" type="button" data-close-modal="deliveryModal">Ahora no</button>
+      </div>
+    </div>
+  </div>
   <script src="js/app.js"></script>
 </body>
 </html>
