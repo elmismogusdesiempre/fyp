@@ -1,73 +1,175 @@
-const CONFIG={whatsapp:'573001234567',email:'info@fpmenajeria.com'};
-const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
-const toast=$('#toast');
-function showToast(msg){if(!toast)return;toast.textContent=msg;toast.classList.add('show');clearTimeout(window.__toast);window.__toast=setTimeout(()=>toast.classList.remove('show'),3200)}
-function wa(message){window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(message)}`,'_blank','noopener');}
-$$('[data-whatsapp="true"]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();wa('Hola, quiero solicitar un envío con FP Mensajería.');}));
-const phoneLinks=$$('[data-phone-link]'); phoneLinks.forEach(a=>{a.href=`https://wa.me/${CONFIG.whatsapp}`;a.target='_blank';a.rel='noopener'});
+/* FP MENSAJERÍA — DEMO INTERACTIONS v5 */
+(() => {
+  'use strict';
 
-// ==============================
-// DEMO: RASTREO DE ENVÍOS
-// ==============================
-const trackingStages=[
-  {icon:'📦',title:'En bodega de recepción',text:'Tu envío fue recibido y está siendo procesado.'},
-  {icon:'🏢',title:'En centro de distribución',text:'Tu paquete está siendo clasificado para continuar su ruta.'},
-  {icon:'🚚',title:'En camino hacia tu ciudad',text:'El envío salió del centro de distribución y continúa hacia su destino.'},
-  {icon:'🛵',title:'En camino hacia ti',text:'El mensajero ya lleva tu envío hacia la dirección de entrega.'},
-  {icon:'🔔',title:'Entrega programada',text:'Tu envío está listo para ser entregado en breve.'},
-  {icon:'✅',title:'Entregado',text:'El envío fue entregado correctamente. ¡Gracias por confiar en FP!'}
-];
-function randomGuide(){
-  const year=new Date().getFullYear();
-  const number=Math.floor(100000+Math.random()*900000);
-  return `FP-${year}-${number}`;
-}
-function openModal(id){
-  const modal=document.getElementById(id); if(!modal)return;
-  modal.classList.add('is-open');modal.setAttribute('aria-hidden','false');
-  document.body.classList.add('modal-open');
-  setTimeout(()=>modal.querySelector('.demo-close')?.focus(),30);
-}
-function closeModal(id){
-  const modal=document.getElementById(id); if(!modal)return;
-  modal.classList.remove('is-open');modal.setAttribute('aria-hidden','true');
-  if(!document.querySelector('.demo-modal.is-open'))document.body.classList.remove('modal-open');
-}
-$$('[data-close-modal]').forEach(el=>el.addEventListener('click',()=>closeModal(el.dataset.closeModal)));
-document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.demo-modal.is-open').forEach(m=>closeModal(m.id));});
-function renderTrackingResult(code,index){
-  const stage=trackingStages[index];
-  $('#modalTrackingCode').textContent=code;
-  $('#trackingStatusIcon').textContent=stage.icon;
-  $('#trackingStatusTitle').textContent=stage.title;
-  $('#trackingStatusText').textContent=stage.text;
-  const timeline=$('#trackingTimeline');
-  timeline.innerHTML=trackingStages.map((item,i)=>`<div class="timeline-item ${i<index?'done':''} ${i===index?'current':''}"><span class="timeline-dot">${i<index?'✓':i===index?item.icon:'•'}</span><div><strong>${item.title}</strong><small>${i<index?'Completado':i===index?'Estado actual':'Pendiente'}</small></div></div>`).join('');
-  openModal('trackingModal');
-}
-const trackingInput=$('#trackingCode');
-if(trackingInput)trackingInput.value=randomGuide();
-$('#trackingForm')?.addEventListener('submit',e=>{
-  e.preventDefault();
-  const code=trackingInput.value.trim().toUpperCase()||randomGuide();
-  trackingInput.value=code;
-  const index=Math.floor(Math.random()*trackingStages.length);
-  renderTrackingResult(code,index);
-});
+  const CONFIG = { whatsapp: '573001234567' };
+  const $ = (selector, root = document) => root.querySelector(selector);
+  const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 
-// ==============================
-// DEMO: ALTA DE NEGOCIOS DELIVERY
-// ==============================
-$('#deliveryGuideBtn')?.addEventListener('click',()=>openModal('deliveryModal'));
-$('#deliveryRegisterBtn')?.addEventListener('click',()=>{
-  closeModal('deliveryModal');
-  wa('Hola, quiero registrar mi negocio en el servicio de delivery de FP Mensajería.');
-  showToast('Abriendo WhatsApp para iniciar el registro…');
-});
+  const trackingStages = [
+    { icon: '📦', title: 'En bodega de recepción', text: 'Tu envío fue recibido y está siendo procesado.' },
+    { icon: '🏢', title: 'En centro de distribución', text: 'Tu paquete está siendo clasificado para continuar su ruta.' },
+    { icon: '🚚', title: 'En camino hacia tu ciudad', text: 'El envío salió del centro de distribución y continúa hacia su destino.' },
+    { icon: '🛵', title: 'En camino hacia ti', text: 'El mensajero ya lleva tu envío hacia la dirección de entrega.' },
+    { icon: '🔔', title: 'Entrega programada', text: 'Tu envío está listo para ser entregado en breve.' },
+    { icon: '✅', title: 'Entregado', text: 'El envío fue entregado correctamente. ¡Gracias por confiar en FP!' }
+  ];
 
-$('#contactForm')?.addEventListener('submit',e=>{e.preventDefault();const f=new FormData(e.currentTarget);const msg=`Hola, soy ${f.get('name')}. Mi teléfono es ${f.get('phone')}. Necesito: ${f.get('message')}`;wa(msg);showToast('Abriendo WhatsApp para enviar la solicitud…');e.currentTarget.reset();});
-const toggle=$('.menu-toggle'),nav=$('.nav');toggle?.addEventListener('click',()=>{const open=nav.classList.toggle('open');toggle.setAttribute('aria-expanded',open)});$$('.nav a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
-const top=$('#toTop');window.addEventListener('scroll',()=>{if(top)top.style.display=scrollY>600?'grid':'none'});top?.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
-if($('#year'))$('#year').textContent=new Date().getFullYear();
-const obs=new IntersectionObserver(entries=>entries.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:.12});$$('.reveal').forEach(el=>obs.observe(el));
-const counters=$$('[data-counter]');let counted=false;const counterObs=new IntersectionObserver(entries=>{if(!entries.some(e=>e.isIntersecting)||counted)return;counted=true;counters.forEach(el=>{const target=Number(el.dataset.counter),prefix=el.dataset.prefix||'',suffix=el.dataset.suffix||'';let n=0;const step=Math.max(1,Math.ceil(target/55));const timer=setInterval(()=>{n=Math.min(target,n+step);el.textContent=prefix+n.toLocaleString('es-CO')+suffix;if(n>=target)clearInterval(timer)},22)})},{threshold:.4});if($('.stats'))counterObs.observe($('.stats'));
+  function randomGuide() {
+    const year = new Date().getFullYear();
+    const number = Math.floor(100000 + Math.random() * 900000);
+    return `FP-${year}-${number}`;
+  }
+
+  function openModal(id) {
+    const modal = document.getElementById(id);
+    if (!modal) return;
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+    const close = $('.demo-close', modal);
+    if (close) setTimeout(() => close.focus(), 30);
+  }
+
+  function closeModal(id) {
+    const modal = document.getElementById(id);
+    if (!modal) return;
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    if (!$('.demo-modal.is-open')) document.body.classList.remove('modal-open');
+  }
+
+  function renderTracking(code, stageIndex) {
+    const stage = trackingStages[stageIndex];
+    $('#modalTrackingCode').textContent = code;
+    $('#trackingStatusIcon').textContent = stage.icon;
+    $('#trackingStatusTitle').textContent = stage.title;
+    $('#trackingStatusText').textContent = stage.text;
+
+    const timeline = $('#trackingTimeline');
+    timeline.innerHTML = trackingStages.map((item, i) => {
+      const done = i < stageIndex;
+      const current = i === stageIndex;
+      return `<div class="timeline-item ${done ? 'done' : ''} ${current ? 'current' : ''}">
+        <span class="timeline-dot">${done ? '✓' : current ? item.icon : '•'}</span>
+        <div><strong>${item.title}</strong><small>${done ? 'Completado' : current ? 'Estado actual' : 'Pendiente'}</small></div>
+      </div>`;
+    }).join('');
+
+    openModal('trackingModal');
+  }
+
+  function whatsapp(message) {
+    window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
+  }
+
+  function init() {
+    // 1. Generate a fresh DEMO guide every time the page loads.
+    const trackingInput = $('#trackingCode');
+    if (trackingInput) trackingInput.value = randomGuide();
+
+    // 2. Tracking form -> random simulated status -> popup.
+    $('#trackingForm')?.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const input = $('#trackingCode');
+      const code = (input?.value || '').trim().toUpperCase() || randomGuide();
+      if (input) input.value = code;
+      const stageIndex = Math.floor(Math.random() * trackingStages.length);
+      renderTracking(code, stageIndex);
+    });
+
+    // 3. Delivery CTA -> popup with emoji-only visual instructions.
+    $('#deliveryGuideBtn')?.addEventListener('click', () => openModal('deliveryModal'));
+
+    // 4. Registration button -> WhatsApp demo handoff.
+    $('#deliveryRegisterBtn')?.addEventListener('click', () => {
+      closeModal('deliveryModal');
+      whatsapp('Hola, quiero registrar mi negocio en el servicio de delivery de FP Mensajería.');
+    });
+
+    // 5. All modal close buttons + backdrop.
+    $$('[data-close-modal]').forEach((element) => {
+      element.addEventListener('click', () => closeModal(element.dataset.closeModal));
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') $$('.demo-modal.is-open').forEach((modal) => closeModal(modal.id));
+    });
+
+    // Existing WhatsApp CTAs.
+    $$('[data-whatsapp="true"]').forEach((element) => {
+      element.addEventListener('click', (event) => {
+        event.preventDefault();
+        whatsapp('Hola, quiero solicitar un envío con FP Mensajería.');
+      });
+    });
+    $$('[data-phone-link]').forEach((element) => {
+      element.href = `https://wa.me/${CONFIG.whatsapp}`;
+      element.target = '_blank';
+      element.rel = 'noopener';
+    });
+
+    // Contact form.
+    $('#contactForm')?.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const form = new FormData(event.currentTarget);
+      whatsapp(`Hola, soy ${form.get('name')}. Mi teléfono es ${form.get('phone')}. Necesito: ${form.get('message')}`);
+      event.currentTarget.reset();
+    });
+
+    // Mobile navigation.
+    const toggle = $('.menu-toggle');
+    const nav = $('.nav');
+    toggle?.addEventListener('click', () => {
+      const isOpen = nav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(isOpen));
+    });
+    $$('.nav a').forEach((a) => a.addEventListener('click', () => nav.classList.remove('open')));
+
+    // Back-to-top.
+    const top = $('#toTop');
+    window.addEventListener('scroll', () => { if (top) top.style.display = window.scrollY > 600 ? 'grid' : 'none'; });
+    top?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    if ($('#year')) $('#year').textContent = new Date().getFullYear();
+
+    // Reveal animations — fail-safe: content remains visible.
+    document.body.classList.add('js-ready');
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      }), { threshold: 0.12 });
+      $$('.reveal').forEach((el) => observer.observe(el));
+    } else {
+      $$('.reveal').forEach((el) => el.classList.add('visible'));
+    }
+
+    // Counters.
+    const counters = $$('[data-counter]');
+    let counted = false;
+    const runCounters = () => {
+      if (counted) return;
+      counted = true;
+      counters.forEach((el) => {
+        const target = Number(el.dataset.counter || 0);
+        const prefix = el.dataset.prefix || '';
+        const suffix = el.dataset.suffix || '';
+        let n = 0;
+        const step = Math.max(1, Math.ceil(target / 55));
+        const timer = setInterval(() => {
+          n = Math.min(target, n + step);
+          el.textContent = prefix + n.toLocaleString('es-CO') + suffix;
+          if (n >= target) clearInterval(timer);
+        }, 22);
+      });
+    };
+    if ('IntersectionObserver' in window && $('.stats')) {
+      const counterObserver = new IntersectionObserver((entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) runCounters();
+      }, { threshold: 0.4 });
+      counterObserver.observe($('.stats'));
+    } else runCounters();
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
